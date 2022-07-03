@@ -1,5 +1,8 @@
 <h1 align="center">JHentai</h1>
 <h6 align="center">NSFW</h6>
+
+![image info](./res/logo.png)
+
 NHentai API that uses Jsoup to get data from the NHentai website
 
 ## Information
