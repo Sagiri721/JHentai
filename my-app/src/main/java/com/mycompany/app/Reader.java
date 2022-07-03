@@ -174,10 +174,253 @@ final class Reader {
 
     //Search results related functions
 
-    public static List<VisibleDoujin> getSearchResults(String search, int bound){
+    /**
+     * 
+     * Use simple keywords for the results but you can also use the filter removal or addition keywords
+     * 
+     * @param search
+     * @param bound
+     * @return
+     * @throws IOException
+     */
+    public static List<VisibleDoujin> getSearchResults(String search, int bound, int page) throws IOException{
         
         if(bound<0 || bound>50) return null;
+        if(page<1) page=1;
 
-        return null;
+        search = search.replace(" ", "+");
+
+        List<VisibleDoujin> list = new ArrayList<VisibleDoujin>();
+
+        document = Jsoup.connect(url + "/search?q=" + search + "&page=" + page).get();
+
+        Elements links = document.select("a");
+
+        int count = 0;
+        for(Element e : links){
+
+            String linkAttribute = e.attr("href");
+            if(linkAttribute.contains("/g/")){
+
+                if(count==bound) break;
+
+                //It's a doujin
+                VisibleDoujin doujin = new VisibleDoujin();
+
+                String id = linkAttribute.split("/")[2];
+                doujin.id = Integer.valueOf(id);
+                
+                list.add(doujin);
+                count++;
+            
+                //Get the cover
+                doujin.cover = e.select("img").attr("src");
+
+                //Get title
+                doujin.title = e.select("div").text();
+            }
+        }
+
+        return list;
+    }
+
+    public static List<VisibleDoujin> getDoujinFromTag(String tag, int bound, int page) throws IOException{
+
+        if(bound<0 || bound>50) return null;
+
+        tag = tag.replace(" ", "-");
+
+        List<VisibleDoujin> list = new ArrayList<VisibleDoujin>();
+
+        document = Jsoup.connect(url + "/tag/" + tag + "?page=" + page).get();
+
+        Elements links = document.select("a");
+
+        int count = 0;
+        for(Element e : links){
+
+            String linkAttribute = e.attr("href");
+            if(linkAttribute.contains("/g/")){
+
+                if(count==bound) break;
+
+                //It's a doujin
+                VisibleDoujin doujin = new VisibleDoujin();
+
+                String id = linkAttribute.split("/")[2];
+                doujin.id = Integer.valueOf(id);
+                
+                list.add(doujin);
+                count++;
+            
+                //Get the cover
+                doujin.cover = e.select("img").attr("src");
+
+                //Get title
+                doujin.title = e.select("div").text();
+            }
+        }
+
+        return list;
+    }
+
+    public static List<VisibleDoujin> getDoujinFromArtist(String artist, int bound, int page) throws IOException{
+
+        if(bound<0 || bound>50) return null;
+
+        artist = artist.replace(" ", "-");
+
+        List<VisibleDoujin> list = new ArrayList<VisibleDoujin>();
+
+        document = Jsoup.connect(url + "/artist/" + artist + "?page=" + page).get();
+
+        Elements links = document.select("a");
+
+        int count = 0;
+        for(Element e : links){
+
+            String linkAttribute = e.attr("href");
+            if(linkAttribute.contains("/g/")){
+
+                if(count==bound) break;
+
+                //It's a doujin
+                VisibleDoujin doujin = new VisibleDoujin();
+
+                String id = linkAttribute.split("/")[2];
+                doujin.id = Integer.valueOf(id);
+                
+                list.add(doujin);
+                count++;
+            
+                //Get the cover
+                doujin.cover = e.select("img").attr("src");
+
+                //Get title
+                doujin.title = e.select("div").text();
+            }
+        }
+
+        return list;
+    }
+
+    public static List<VisibleDoujin> getDoujinFromCharacter(String character, int bound, int page) throws IOException{
+
+        if(bound<0 || bound>50) return null;
+
+        character = character.replace(" ", "-");
+
+        List<VisibleDoujin> list = new ArrayList<VisibleDoujin>();
+
+        document = Jsoup.connect(url + "/character/" + character + "?page=" + page).get();
+
+        Elements links = document.select("a");
+
+        int count = 0;
+        for(Element e : links){
+
+            String linkAttribute = e.attr("href");
+            if(linkAttribute.contains("/g/")){
+
+                if(count==bound) break;
+
+                //It's a doujin
+                VisibleDoujin doujin = new VisibleDoujin();
+
+                String id = linkAttribute.split("/")[2];
+                doujin.id = Integer.valueOf(id);
+                
+                list.add(doujin);
+                count++;
+            
+                //Get the cover
+                doujin.cover = e.select("img").attr("src");
+
+                //Get title
+                doujin.title = e.select("div").text();
+            }
+        }
+
+        return list;
+    }
+
+    public static List<VisibleDoujin> getDoujinFromParody(String parody, int bound, int page) throws IOException{
+
+        if(bound<0 || bound>50) return null;
+
+        parody = parody.replace(" ", "-");
+
+        List<VisibleDoujin> list = new ArrayList<VisibleDoujin>();
+
+        document = Jsoup.connect(url + "/parodies/" + parody + "?page=" + page).get();
+
+        Elements links = document.select("a");
+
+        int count = 0;
+        for(Element e : links){
+
+            String linkAttribute = e.attr("href");
+            if(linkAttribute.contains("/g/")){
+
+                if(count==bound) break;
+
+                //It's a doujin
+                VisibleDoujin doujin = new VisibleDoujin();
+
+                String id = linkAttribute.split("/")[2];
+                doujin.id = Integer.valueOf(id);
+                
+                list.add(doujin);
+                count++;
+            
+                //Get the cover
+                doujin.cover = e.select("img").attr("src");
+
+                //Get title
+                doujin.title = e.select("div").text();
+            }
+        }
+
+        return list;
+    }
+
+    public static List<VisibleDoujin> getDoujinFromGroup(String group, int bound, int page) throws IOException{
+
+        if(bound<0 || bound>50) return null;
+
+        group = group.replace(" ", "-");
+
+        List<VisibleDoujin> list = new ArrayList<VisibleDoujin>();
+
+        document = Jsoup.connect(url + "/groups/" + group + "?page=" + page).get();
+
+        Elements links = document.select("a");
+
+        int count = 0;
+        for(Element e : links){
+
+            String linkAttribute = e.attr("href");
+            if(linkAttribute.contains("/g/")){
+
+                if(count==bound) break;
+
+                //It's a doujin
+                VisibleDoujin doujin = new VisibleDoujin();
+
+                String id = linkAttribute.split("/")[2];
+                doujin.id = Integer.valueOf(id);
+                
+                list.add(doujin);
+                count++;
+            
+                //Get the cover
+                doujin.cover = e.select("img").attr("src");
+
+                //Get title
+                doujin.title = e.select("div").text();
+            }
+        }
+
+        return list;
     }
 }
