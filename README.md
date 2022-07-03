@@ -140,7 +140,7 @@ Output:
 All the pages of the book are saved in the List of strings images.
 The cover is saved seperately in the variable cover.
 
-What is saved is not a BufferedImage but rather an url.
+What is saved is not an BufferedImage but rather a url.
 
 To display the cover on a JFrame app you can do it for example with a JLabel, with  the following code:
 ```java
