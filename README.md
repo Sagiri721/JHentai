@@ -40,8 +40,8 @@ __Doujinshi__
 * id;
 * url;
 * uploadDate;
-* title
-* originalTitle
+* title;
+* originalTitle;
 * tags;
 * artists;
 * languages;
@@ -140,9 +140,9 @@ Output:
 All the pages of the book are saved in the List of strings images.
 The cover is saved seperately in the variable cover.
 
-What is saved is not a BufferedImage but an url.
+What is saved is not a BufferedImage but a url.
 
-To display the cover on a JFrame app you can do it for example with a JLabel, with  the following code:
+To display the cover on a Javax.Swing app you can do it, for example, with a JLabel, with  the following code:
 ```java
 URL url = new URL(doujin.cover);
 image = ImageIO.read(url);
